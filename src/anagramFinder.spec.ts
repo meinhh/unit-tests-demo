@@ -1,7 +1,14 @@
 import {AnagramFinder} from "./anagramFinder";
+import {AntiVirus} from "./antiVirus";
 
 describe('isAnagram', () => {
-	const anagramFinder: AnagramFinder = new AnagramFinder()
+	let anagramFinder: AnagramFinder;
+	const mockedAntiVirus = new (<new () => AntiVirus>AntiVirus)() as jest.Mocked<AntiVirus>;
+
+	beforeEach(() => {
+		mockedAntiVirus.isVirus = jest.fn().mockResolvedValue(false)
+		anagramFinder = new AnagramFinder(mockedAntiVirus)
+	})
 
 	it('should return true on same string', async () => {
 		expect(await anagramFinder.isAnagram('test', 'test')).toBeTruthy()
@@ -16,7 +23,7 @@ describe('isAnagram', () => {
 		expect(await anagramFinder.isAnagram('test', 'wow')).toBeFalsy()
 	})
 	it('should throw an exception on virus', async () => {
-		// expect(anagramFinder.isAnagram('virus', 'test')).toThrowError('Value is a virus')
+		mockedAntiVirus.isVirus = jest.fn().mockResolvedValue(true)
 		expect.assertions(1)
 		await expect(anagramFinder.isAnagram('virus', 'test')).rejects.toThrowError('Value is a virus')
 	})
