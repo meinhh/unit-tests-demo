@@ -3,10 +3,12 @@ import {AntiVirus} from "./antiVirus";
 
 describe('isAnagram', () => {
 	let anagramFinder: AnagramFinder;
-	const mockedAntiVirus = new (<new () => AntiVirus>AntiVirus)() as jest.Mocked<AntiVirus>;
+	let mockedAntiVirus: jest.Mocked<AntiVirus>;
 
 	beforeEach(() => {
-		mockedAntiVirus.isVirus = jest.fn().mockResolvedValue(false)
+		mockedAntiVirus = {
+			isVirus: jest.fn().mockResolvedValue(false)
+		}
 		anagramFinder = new AnagramFinder(mockedAntiVirus)
 	})
 
