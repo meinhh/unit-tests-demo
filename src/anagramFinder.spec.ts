@@ -24,11 +24,6 @@ describe('isAnagram', () => {
 	it('should return false on different strings', async () => {
 		expect(await anagramFinder.isAnagram('test', 'wow')).toBeFalsy()
 	})
-	it('should throw an exception on virus', async () => {
-		mockedAntiVirus.isVirus = jest.fn().mockResolvedValue(true)
-		expect.assertions(1)
-		await expect(anagramFinder.isAnagram('virus', 'test')).rejects.toThrowError('Value is a virus')
-	})
 	describe('should check if values are viruses', () => {
 		it('should throw an exception on string 1 is a virus', async () => {
 			mockedAntiVirus.isVirus = jest.fn().mockResolvedValue(true)
