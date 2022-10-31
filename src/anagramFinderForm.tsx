@@ -16,15 +16,17 @@ export const AnagramFinderForm = () => {
 	return (
 		<div>
 			<div>
-				<input type="text" value={string1} onChange={(e) => setString1(e.target.value)}/>
-				<input type="text" value={string2} onChange={(e) => setString2(e.target.value)}/>
-				<button disabled={!string1 || !string2} onClick={checkAnagrams}>
+				<input data-testid="string1-input" type="text" value={string1}
+					   onChange={(e) => setString1(e.target.value)}/>
+				<input data-testid="string2-input" type="text" value={string2}
+					   onChange={(e) => setString2(e.target.value)}/>
+				<button data-testid="submit-button" disabled={!string1 || !string2} onClick={checkAnagrams}>
 					Submit
 				</button>
 			</div>
 			{
 				isAnagram !== undefined &&
-				<div>The text are{isAnagram ? '' : "n't"} anagrams</div>
+				<div data-testid="result">The text are{isAnagram ? '' : "n't"} anagrams</div>
 			}
 		</div>
 	)
