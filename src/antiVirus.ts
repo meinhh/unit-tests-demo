@@ -3,7 +3,7 @@ export class AntiVirus {
 		return new Promise<boolean>(resolve => {
 			setTimeout(() => {
 				resolve(value === 'virus')
-			}, 1000)
+			}, 10000)
 		})
 	}
 }
